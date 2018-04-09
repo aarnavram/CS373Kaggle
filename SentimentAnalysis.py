@@ -25,13 +25,14 @@ def main():
     model.add(Dropout(0.5))
     model.add(Dense(5, activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    print(model.summary())
 
     Y = pd.get_dummies(data['sentiment']).values
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y)
-    model.fit(X_train, Y_train, epochs=20, batch_size=32, verbose=2)
+    model.fit(X_train, Y_train, epochs=15, batch_size=32, verbose=2)
 
     score, accuracy = model.evaluate(X_test, Y_test, verbose=2)
-    print("Accuracy: %.2f" % (accuracy))
+    print("Accuracy: %.2f" % accuracy)
 
 
 if __name__ == "__main__":
